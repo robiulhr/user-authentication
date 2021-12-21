@@ -1,0 +1,60 @@
+<%- include('../partials/header')%>
+    <div class="login-div">
+
+        <form action="/login" method="post">
+            <!-- ================ server error ================= -->
+
+            <%if (locals.errormassage ) { %>
+                <div class="mb-1 alert alert-danger">
+                    <%= locals.errormassage %>
+                </div>
+                <% } %>
+                    <!-- ================ database tarrable error ================= -->
+                    <%if (locals.databasetarrableError ) { %>
+                        <div class="mb-1 alert alert-danger">
+                            <%= locals.databasetarrableError%>
+                        </div>
+                        <% } %>
+                            <!-- ================ database syntex error ================= -->
+                            <%if (locals.databaseError ) { %>
+                                <div class="mb-1 alert alert-danger">
+                                    <%= locals.databaseError%>
+                                </div>
+                                <% } %>
+                                    <!-- ================ database user not found error ================= -->
+                                    <%if (locals.databaseErrornouser ) { %>
+                                        <div class="mb-1 alert alert-danger">
+                                            <%= locals.databaseErrornouser%>
+                                        </div>
+                                        <% } %>
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">User name</label>
+                                                <input required type="text" class="form-control  <%if (locals.errorpath) { %><%- locals.errorpath ==  'username' ? 'is-invalid' : ''  %>  
+                       <% } %>" value="<%- locals.value ? `${locals.value.username}` : '' %>" id="username"
+                                                    name="username">
+                                                <div id="usernamealert" class="form-text" style="display: none;"></div>
+                                            </div>
+                                            <div class="mb-3 password-div">
+                                                <label for="Password" class="form-label">Password</label>
+                                                <input required type="password" class="form-control  <%if (locals.errorpath) { %><%- locals.errorpath ==  'password' ? 'is-invalid' : ''  %>  
+                       <% } %>" value="<%- locals.value ? `${locals.value.password}` : '' %>" id="Password"
+                                                    name="password" data-robiul="password">
+                                                <div class="password-toggle"><i class="fas fa-eye-slash"
+                                                        id="passwordshowhide"></i>
+                                                </div>
+                                                <div id="passwordalert" class="form-text" style="display: none;"></div>
+                                                <div id="passwordsuggestion" class="form-text" style="display: none;">
+                                                </div>
+
+                                            </div>
+                                            <div class="mb-2">
+                                                <p class="white-text">Don't have a account? <a href="/register"
+                                                        class="links-white-green">
+                                                        register</a></p>
+                                                <p></p>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" id="login">Login</button>
+        </form>
+    </div>
+    <script src="js/login.js" type="module"></script>
+    <%- include('../partials/footer')%>

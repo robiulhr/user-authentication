@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-property: all;
+}
+label {
+  color: white;
+}
+
+.links-white-green {
+  color: aquamarine;
+}
+.white-text {
+  color: white;
+}
+
+.login-div,
+.register-div {
+  background-color: cornflowerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.login-div form,
+.register-div form {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #445b82b0;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 4px 3px #0000003b;
+}
+.login-div form div,
+.register-div form div,
+.login-div form > :not(.form-check),
+.register-div form > :not(.form-check) {
+  width: 100%;
+  outline: none;
+}
+
+.login-div form button,
+.register-div form button {
+  width: 100%;
+}
+.form-text {
+  color: white;
+}
+
+.password-toggle {
+  display: inline;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.password-toggle i {
+  position: relative;
+  top: -25px;
+  right: 10px;
+}
+#passwordalert,
+#passwordsuggestion,
+#conformpasswordalert {
+  transition: 0.4s all cubic-bezier(0.98, 0.96, 0.52, 1.07) !important;
+}
+/* //------------------- */
+@media only screen and (max-width: 1300px) {
+  .login-div form,
+  .register-div form {
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .login-div form,
+  .register-div form {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .login-div form,
+  .register-div form {
+    width: 70%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .login-div form,
+  .register-div form {
+    width: 90%;
+  }
+}
+
+/* ======================================= */
+.home_left_img {
+  padding-top: 0 !important;
+}
+.latest_blog_area {
+  background-color: #f9f9ff;
+}
+.home_banner_area .banner_inner {
+  background-color: #4846461c;
+}

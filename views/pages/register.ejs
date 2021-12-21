@@ -1,0 +1,106 @@
+<%- include('../partials/header')%>
+    <div class="register-div">
+        <form action="/register" method="post">
+            <!-- ================ server error =============== -->
+            <%if (locals.errormassage ) { %>
+                <div class="mb-1 alert alert-danger">
+                    <%= locals.errormassage %>
+                </div>
+                <% } %>
+                    <!-- ================ database error ================= -->
+                    <%if (locals.databaseError ) { %>
+                        <!-- ================ database syntex error ================= -->
+                        <%if (locals.databaseError.errors ) { %>
+                            <div class="mb-1 alert alert-danger">
+                                <%= locals.databaseError.errors.name.properties.message %>
+                            </div>
+                            <% } %>
+                                <!-- ================ database dublicate data error ================= -->
+
+                                <%if (locals.databaseError.code ) { %>
+                                    <div class="mb-1 alert alert-danger">
+                                        <!-- error for dublicate username -->
+                                        <%if ( locals.databaseError.keyValue.hasOwnProperty('username')) { %>
+
+                                            username <%=`"${locals.databaseError.keyValue.username}"`%> is
+                                                already in use
+                                                <% } %>
+                                                    <!-- error for dublicate email -->
+
+                                                    <% if (locals.databaseError.keyValue.hasOwnProperty('email')){%>
+
+                                                        email <%=`"${locals.databaseError.keyValue.email}"`%>
+                                                            is already in use
+                                                            <% } %>
+                                                                <!-- check for dublicate password -->
+                                                                <% if
+                                                                    (locals.databaseError.keyValue.hasOwnProperty('password')){%>
+                                                                    please use a strong password
+                                                                    <% } %>
+                                    </div>
+                                    <% } %>
+                                        <% } %>
+
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Name</label>
+                                                <input required type="text" class="form-control <%if (locals.errorpath) { %><%- locals.errorpath ==  'name' ? 'is-invalid' : ''  %>  
+                       <% } %>" id="name" name="name" value="<%- locals.value ? `${locals.value.name}` : '' %>">
+
+                                                <div id="namealert" class="form-text" style="display: none;">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">User Name</label>
+                                                <input required type="text" class="form-control <%if (locals.errorpath) { %><%- locals.errorpath ==  'username' ? 'is-invalid' : ''  %>  
+                       <% } %>" id="username" name="username"
+                                                    value="<%- locals.value ? `${locals.value.username}` : '' %>">
+                                                <div id="usernamealert" class="form-text" style="display: none;"></div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email address</label>
+                                                <input required type="email" class="form-control <%if (locals.errorpath) { %><%- locals.errorpath ==  'email' ? 'is-invalid' : ''  %>  
+                       <% } %>" id="email" name="email" value="<%- locals.value ? `${locals.value.email}` : '' %>">
+                                                <div id="emailalert" class="form-text" style="display: none;"></div>
+                                            </div>
+                                            <div class="mb-3 password-div">
+                                                <label for="Password" class="form-label">Password</label>
+                                                <input required type="password" class="form-control <%if (locals.errorpath) { %><%- locals.errorpath ==  'password' ? 'is-invalid' : ''  %>  
+                       <% } %>" id="Password" name="password" data-robiul="password"
+                                                    value="<%- locals.value ? `${locals.value.password}` : '' %>">
+                                                <div class="password-toggle" id=""><i class="far fa-eye-slash"
+                                                        id="passwordshowhide"></i> </div>
+                                                <div id="passwordalert" class="form-text"></div>
+                                                <div id="passwordsuggestion" class="form-text" style="display: none;">
+                                                </div>
+
+                                            </div>
+                                            <div class="mb-3 password-div">
+                                                <label for="confromPassword" class="form-label">Conform Password</label>
+                                                <input required type="password" class="form-control <%if (locals.errorpath) { %><%- locals.errorpath ==  'conformPassword' ? 'is-invalid' : ''  %>  
+                       <% } %>" id="confromPassword" name="conformPassword" data-robiul="password"
+                                                    value="<%-locals.value ?`${locals.value.conformPassword}`:''%>">
+                                                <div class="password-toggle" id=""><i class="far fa-eye-slash"
+                                                        id="passwordshowhide"></i> </div>
+                                                <div id="conformpasswordalert" class="form-text" style="display: none;">
+                                                </div>
+
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input required type="checkbox" class="form-check-input <%if (locals.errorpath) { %><%- locals.errorpath ==  'termsCondition' ? 'is-invalid' : ''  %>  
+                       <% } %>" id="termsCondition" name="termsCondition" <%- locals.value ?
+                                                    locals.value.termsCondition=="true" ? "checked" : "" : '' %>
+                                                value="true">
+                                                <label class="form-check-label" for="termsCondition">Agree to <a
+                                                        href="#" class="links-white-green">terms
+                                                        and
+                                                        condition</a> </label>
+                                            </div>
+                                            <div>
+                                                <p class="white-text">Already have an account? <a href="/login"
+                                                        class="links-white-green "> Login</a></p>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary" id="register">Submit</button>
+        </form>
+    </div>
+    <script src="js/register.js" type="module"></script>
+    <%- include('../partials/footer')%>
